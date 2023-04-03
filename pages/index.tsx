@@ -11,8 +11,8 @@ export default function HomePage() {
         <Welcome />
         <ColorSchemeToggle />
         <Group position="center">
-          <LinkItem label="Go to post page" link="./posts/first-post" />
-          <LinkItem label="Emails" link="./emails" />
+          {/* <LinkItem label="Go to post page" link="./posts/first-post" />
+          <LinkItem label="Emails" link="./emails" /> */}
         </Group>
       </AdminShell>
 
