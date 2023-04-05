@@ -18,6 +18,8 @@ import {
 
 import MainLinks from './MainLinks'
 
+import { ColorSchemeToggle } from './ColorSchemeToggle/ColorSchemeToggle';
+
 
 
 const useStyles = createStyles((theme) => ({
@@ -36,7 +38,7 @@ const useStyles = createStyles((theme) => ({
 
 
 
-export default function AdminShell({children}) {
+export default function AdminShell({children, showAside}) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
 
@@ -54,9 +56,11 @@ export default function AdminShell({children}) {
       asideOffsetBreakpoint="sm"
       
       navbar={
-    <Navbar height={600} p="xs" width={{ base: 300 }}>
+    <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
       
-      <Navbar.Section>ShopHub Dashboard</Navbar.Section>
+      <Navbar.Section style={{display: "flex"}}>ShopHub Dashboard
+        
+      </Navbar.Section>
       
       <Navbar.Section grow mt="md">
         
@@ -64,14 +68,17 @@ export default function AdminShell({children}) {
 
       </Navbar.Section>
       <Navbar.Section>{/* Footer with user */}</Navbar.Section>
+      <ColorSchemeToggle />
     </Navbar>
       }
       aside={
-        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
-          </Aside>
-        </MediaQuery>
+        !showAside === true ? null : (
+          <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+            <Aside p="md" hiddenBreakpoint="md" width={{ sm: 200, lg: 300 }}>
+              <Text>Application sidebar</Text>
+            </Aside>
+          </MediaQuery>
+        )
       }
       footer={
         <Footer height={60} p="md">

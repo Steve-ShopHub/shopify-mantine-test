@@ -5,18 +5,22 @@ import {
     createStyles,
     getStylesRef,
     rem,
-    ThemeIcon
+    ThemeIcon,
  
   } from '@mantine/core';
 
-import { IconHome2, IconStar, IconMail, IconChartGridDots, IconPalette, IconBrush, IconArrowsLeftRight, IconRubberStamp, IconGift } from '@tabler/icons-react';
+import { IconHome2, IconStar, IconMail, IconChartGridDots, IconPalette, IconBrush, IconArrowsLeftRight, IconRubberStamp, IconGift, IconManualGearbox, IconGraph, IconSettings } from '@tabler/icons-react';
+import Link from 'next/link';
 import { LinkItem } from './LinkItem';
+import { useState } from 'react';
 
 
 
 
 export default function MainLinks() {
 
+    const [loyaltyNavIsOpen, setLoyaltyNavIsOpen] = useState(false);
+    const [appearanceNavIsOpen, setAppearanceNavIsOpen] = useState(false);
 
     return (
 
@@ -33,47 +37,70 @@ export default function MainLinks() {
             
         <NavLink 
         label="Loyalty Program" 
-        icon={<ThemeIcon  variant="light">{<IconStar size="1rem" stroke={1.5} />} </ThemeIcon>}
-           
-        
+        icon={<ThemeIcon 
+            variant="light">{<IconStar size="1rem" stroke={1.5} />} 
+            </ThemeIcon>}                  
         childrenOffset={28}
+        opened={loyaltyNavIsOpen}
+        onClick={() => {setLoyaltyNavIsOpen(!loyaltyNavIsOpen)}}
         >
             
 
-            <LinkItem label="Ways to earn" 
+            <Link href="/loyalty-program/ways-to-earn"><NavLink label="Ways to earn" 
             icon={<IconRubberStamp size="1rem" 
             stroke={1.5} />} 
-            link="/loyalty-program/ways-to-earn" />
+            link="/loyalty-program/ways-to-earn"
+            />
+            </Link>
 
-            <LinkItem 
+            <Link href="/loyalty-program/rewards"><NavLink 
             label="Rewards" 
             icon={<IconGift size="1rem" stroke={1.5} />} 
-            link="/loyalty-program/rewards"/>
+            link="/loyalty-program/rewards"
+            /></Link>
 
         </NavLink>
         
         <NavLink 
         label="Appearance" 
         icon={<ThemeIcon  variant="light">{<IconPalette size="1rem" stroke={1.5} />} </ThemeIcon>}
-        childrenOffset={28}>
+        childrenOffset={28}
+        opened={appearanceNavIsOpen}
+        onClick={() => {setAppearanceNavIsOpen(!appearanceNavIsOpen)}}
+        >
             
-            <LinkItem 
-            label="Branding" 
-            link="/branding" 
-            icon={<IconBrush size="1rem" stroke={1.5} />}/>
+            <Link href="/appearance/branding">
+                <NavLink
+                label="Branding"
+                link="/appearance/branding"
+                icon={<IconBrush size="1rem" stroke={1.5} />}/>
+            </Link>
 
-            <LinkItem 
-            label="Placement" 
-            link="/placement" 
-            icon={<IconArrowsLeftRight size="1rem" stroke={1.5} />} />
+            <Link href="/appearance/placement">
+                <NavLink
+                label="Placement"
+                link="/placement"
+                icon={<IconArrowsLeftRight size="1rem" stroke={1.5} />} />
+            </Link>
 
-            <LinkItem 
-            label="Emails" 
-            link="/emails" 
-            icon={<IconMail size="1rem" stroke={1.5} />} />
+            <Link href="/appearance/emails">
+                <NavLink
+                label="Emails"
+                link="/emails"
+                icon={<IconMail size="1rem" stroke={1.5} />} />
+            </Link>
 
         </NavLink>
         
+        <LinkItem 
+            label="Analytics" 
+            link="/analytics/analytics" 
+            icon={<IconGraph size="1rem" stroke={1.5} />} />
+
+        <LinkItem 
+            label="Settings" 
+            link="/settings" 
+            icon={<IconSettings size="1rem" stroke={1.5} />} />
 
     </div>
 
